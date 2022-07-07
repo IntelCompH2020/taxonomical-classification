@@ -1,1 +1,1 @@
-# taxonomical-classification
+# Model trainer for the classification service

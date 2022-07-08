@@ -8,10 +8,9 @@ from transformers import (
     HfArgumentParser, 
     pipeline, 
     AutoConfig, 
-    AutoTokenizer
+    AutoTokenizer,
     AutoModelForSequenceClassification, 
 )
-
 
 @dataclass
 class DataArguments:

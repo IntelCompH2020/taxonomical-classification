@@ -256,14 +256,14 @@ def main():
     print(">>> datasets mapped :)")
 
     if training_args.do_train:
-        if "train" not in raw_datasets or data_args.train_set_path is not None:
+        if "train" not in raw_datasets:
             raise ValueError("--do_train requires a train dataset")
         train_dataset = raw_datasets["train"]
         if data_args.max_train_samples is not None:
             max_train_samples = min(len(train_dataset), data_args.max_train_samples)
             train_dataset = train_dataset.select(range(max_train_samples))
 
-    if training_args.do_eval or data_args.dev_set_path is not None:
+    if training_args.do_eval:
         if "validation" not in raw_datasets:
             raise ValueError("--do_eval requires a validation dataset")
         eval_dataset = raw_datasets["validation"]
@@ -271,7 +271,7 @@ def main():
             max_eval_samples = min(len(eval_dataset), data_args.max_eval_samples)
             eval_dataset = eval_dataset.select(range(max_eval_samples))
 
-    if training_args.do_predict or data_args.test_set_path is not None:
+    if training_args.do_predict:
         if "test" not in raw_datasets:
             raise ValueError("--do_predict requires a test dataset")
         predict_dataset = raw_datasets["test"]
@@ -360,21 +360,18 @@ def main():
         logger.info("*** Predict ***")
 
         # Removing the `label` columns because it contains -1s
-        predict_dataset = predict_dataset.remove_columns("label")
+        predict_dataset = predict_dataset.remove_columns("labels")
         predictions = trainer.predict(predict_dataset, metric_key_prefix="predict").predictions
-        predictions = np.squeeze(predictions) if is_regression else np.argmax(predictions, axis=1)
+        predictions = np.argmax(predictions, axis=1)
 
         output_predict_file = os.path.join(training_args.output_dir, f"predict_results_{data_args.taxonomy}.txt")
         if trainer.is_world_process_zero():
             with open(output_predict_file, "w") as writer:
-                logger.info(f"***** Predict results {data_args.taxonomy} *****")
+                logger.info(f"***** Predict results *****")
                 writer.write("index\tprediction\n")
                 for index, item in enumerate(predictions):
-                    if is_regression:
-                        writer.write(f"{index}\t{item:3.3f}\n")
-                    else:
-                        item = label_list[item]
-                        writer.write(f"{index}\t{item}\n")
+                    item = label_list[item]
+                    writer.write(f"{index}\t{item}\n")
 
 
 if __name__ == "__main__":

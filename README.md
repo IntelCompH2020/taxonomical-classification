@@ -30,10 +30,10 @@ The new directory will have the following folder structure:
 - `logs/`: Directory where the .err and .out slurm log files will be stored.
 - `tb/`: Directory where tensorboard files will be stored, for visualization of the training progess.
 - `output/`: Directory where the model checkpoints will be stored.
-- `config.json`: Configuration file where the user can modify the hyperparameters' default values.
-- `train_singlenode.sh`: Script to launch a single-node job to an HPC cluster.
-- `train_multinode.sh`: Script to launch a multi-node job to an HPC cluster.
-- WiP!!!
+- `hyperparameters.config.sh`: Configuration file where the user can modify the hyperparameters' default values.
+- `generate_run.sh`: Script to generate the run.sh based on the hyperparameters.config.sh.
+- `finetune_classifier.py`: Main code that runs on top of the trainer from huggingface.
+- `data_loader.py`: Data loader that can load any parquet table for model training or inference.
 
 2) Download the model to be finetuned.
 
@@ -53,17 +53,30 @@ As an example, the following command would download a [RoBERTa-large](https://hu
 	cd taxonomies/$TAXONOMY_NAME
 ```
 
-3) Edit the configuration file.
+4) Edit the configuration file.
 
 ```console
-	vim config.sh
+	vim hyperparameters.config.sh
 ```
 
-5) Launch the finetuning job.
+5) Generate the run.sh.
 
 ```console
-	bash launch_job.sh
+	bash generate_run.sh
 ```
+
+6) launch run.sh.
+
+If run locally
+```console
+	train_files=<ADD_TRAIN_FILES_HERE>
+	dev_files=<ADD_DEV_FILES_HERE>
+	test_files=<ADD_TEST_FILES_HERE>
+	text_column=<ADD_TEXT_COLUMN_HERE>
+	label_column=<ADD_LABEL_COLUMN_HERE>
+	bash run.sh train_files=$train_files dev_files=$dev_files test_files=$test_files text_column=$text_column label_column=$label_column
+```
+
 
 ---
 

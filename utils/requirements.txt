@@ -2,4 +2,4 @@ torch==1.12.0
 datasets==2.3.2
 tensorboard==2.9.1
 transformers==4.20.1
-scikit-learn==1.1.1
+scikit-learn

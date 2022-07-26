@@ -27,19 +27,19 @@ The following command will create a new directory inside `./taxonomies` with the
 
 The new directory will have the following folder structure:
 
+- `output/`: Directory where the model checkpoints will be stored.
 - `logs/`: Directory where the .err and .out slurm log files will be stored.
 - `tb/`: Directory where tensorboard files will be stored, for visualization of the training progess.
-- `output/`: Directory where the model checkpoints will be stored.
 - `hyperparameters.config.sh`: Configuration file where the user can modify the hyperparameters' default values.
-- `generate_run.sh`: Script to generate the run.sh based on the hyperparameters.config.sh.
-- `finetune_classifier.py`: Main code that runs on top of the trainer from huggingface.
-- `data_loader.py`: Data loader that can load any parquet table for model training or inference.
+- `generate_run.sh`: Script to generate the run.sh file based on the hyperparameters.config.sh.
+- `finetune_classifier.py`: Main code that runs on top of the Trainer class from HuggingFace.
+- `data_loader.py`: Script to load any parquet table for model training or inference.
 
 2) Download the model to be finetuned.
 
 Once the working directory has been created, the base model to be finetuned has to be added to the `./models` directory.
 
-This can be done by simply dragging a checkpoint from your local file system, or alternatively it can be downloaded from the internet. We provide a few bash scripts that download models publicly available in the Huggingface Hub.
+This can be done by simply dragging a checkpoint from your local file system, or alternatively it can be downloaded from the internet. We provide a few bash scripts that download models publicly available in the HuggingFace Hub.
 
 As an example, the following command would download a [RoBERTa-large](https://huggingface.co/roberta-large) model inside `./models/roberta-large`:
 
@@ -59,13 +59,13 @@ As an example, the following command would download a [RoBERTa-large](https://hu
 	vim hyperparameters.config.sh
 ```
 
-5) Generate the run.sh.
+5) Generate the run.sh file.
 
 ```console
 	bash generate_run.sh
 ```
 
-6) launch run.sh.
+6) Launch the script.
 
 If run locally
 ```console

@@ -16,7 +16,7 @@ bash setup_environment.sh
 
 ## How to use
 
-###1) Create a working directory for the new taxonomy.
+### 1) Create a working directory for the new taxonomy.
 
 The following command will create a new directory inside `./taxonomies` with the given TAXONOMY_NAME.
 
@@ -35,7 +35,7 @@ The new directory will have the following folder structure:
 - `finetune_classifier.py`: Main code that runs on top of the Trainer class from HuggingFace.
 - `data_loader.py`: Script to load any parquet table for model training or inference.
 
-###2) Download the model to be finetuned.
+### 2) Download the model to be finetuned.
 
 Once the working directory has been created, the base model to be finetuned has to be added to the `./models` directory.
 
@@ -47,25 +47,25 @@ As an example, the following command would download a [RoBERTa-large](https://hu
 bash models/download_roberta_large.sh
 ```
 
-###3) Go to your working directory.
+### 3) Go to your working directory.
 
 ```console
 cd taxonomies/$TAXONOMY_NAME
 ```
 
-###4) Edit the configuration file.
+### 4) Edit the configuration file.
 
 ```console
 vim hyperparameters.config.sh
 ```
 
-###5) Generate the run.sh file.
+### 5) Generate the run.sh file.
 
 ```console
 bash generate_run.sh
 ```
 
-###6) Launch the script.
+### 6) Launch the script.
 
 To run locally, follow this example:
 ```console

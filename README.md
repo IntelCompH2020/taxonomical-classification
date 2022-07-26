@@ -9,9 +9,9 @@ This repository can be used to train supervised classifiers on new taxonomies.
 Clone this repository and install the required libraries as follows:
 
 ```console
-	git clone git@github.com:IntelCompH2020/taxonomical-classification.git
-	cd taxonomical-classification
-	bash setup_environment.sh
+git clone git@github.com:IntelCompH2020/taxonomical-classification.git
+cd taxonomical-classification
+bash setup_environment.sh
 ```
 
 ## How to use
@@ -21,8 +21,8 @@ Clone this repository and install the required libraries as follows:
 The following command will create a new directory inside `./taxonomies` with the given TAXONOMY_NAME.
 
 ```console
-	TAXONOMY_NAME=<ADD_TAXONOMY_NAME_HERE>
-	bash new_taxonomy.sh taxonomy_name=$TAXONOMY_NAME
+TAXONOMY_NAME=<ADD_TAXONOMY_NAME_HERE>
+bash new_taxonomy.sh taxonomy_name=$TAXONOMY_NAME
 ```
 
 The new directory will have the following folder structure:
@@ -44,60 +44,62 @@ This can be done by simply dragging a checkpoint from your local file system, or
 As an example, the following command would download a [RoBERTa-large](https://huggingface.co/roberta-large) model inside `./models/roberta-large`:
 
 ```console
-	bash models/download_roberta_large.sh
+bash models/download_roberta_large.sh
 ```
 
 3) Go to your working directory.
 
 ```console
-	cd taxonomies/$TAXONOMY_NAME
+cd taxonomies/$TAXONOMY_NAME
 ```
 
 4) Edit the configuration file.
 
 ```console
-	vim hyperparameters.config.sh
+vim hyperparameters.config.sh
 ```
 
 5) Generate the run.sh file.
 
 ```console
-	bash generate_run.sh
+bash generate_run.sh
 ```
 
 6) Launch the script.
 
 To run locally, follow this example:
 ```console
-	TRAIN_DATA=../../data/toy_example/patstat_train/
-	DEV_DATA=../../data/toy_example/patstat_dev
-	TEST_DATA=../../data/toy_example/patstat_test/
-	TEXT_COL="text"
-	LABEL_COL="ipc0"
+TRAIN_DATA=../../data/toy_example/patstat_train/
+DEV_DATA=../../data/toy_example/patstat_dev
+TEST_DATA=../../data/toy_example/patstat_test/
+TEXT_COL="text"
+LABEL_COL="ipc0"
 
-	bash run.sh train_files=$TRAIN_DATA \
-				dev_files=$DEV_DATA \
-				test_files=$TEST_DATA \
-				text_column=$TEXT_COL \
-				label_column=$LABEL_COL
+bash run.sh train_files=$TRAIN_DATA \
+			dev_files=$DEV_DATA \
+			test_files=$TEST_DATA \
+			text_column=$TEXT_COL \
+			label_column=$LABEL_COL
 ```
 
 To run on HPC, follow this example:
 ```console
-	TRAIN_DATA=../../data/toy_example/patstat_train/
- 	DEV_DATA=../../data/toy_example/patstat_dev
-	TEST_DATA=../../data/toy_example/patstat_test/
-	TEXT_COL="text"
-	LABEL_COL="ipc0"
+TRAIN_DATA=../../data/toy_example/patstat_train/
+DEV_DATA=../../data/toy_example/patstat_dev
+TEST_DATA=../../data/toy_example/patstat_test/
+TEXT_COL="text"
+LABEL_COL="ipc0"
 
-	sbatch run.sh train_files=$TRAIN_DATA \
-				  dev_files=$DEV_DATA \
-				  test_files=$TEST_DATA \
-				  text_column=$TEXT_COL \
-				  label_column=$LABEL_COL                                                                                          ```
-The `run.sh` script will be different based on the parameters given in the configuration file (e.g. if it is supposed to run locally or in hpc, the number of nodes, etc)
+sbatch run.sh train_files=$TRAIN_DATA \
+			  dev_files=$DEV_DATA \
+			  test_files=$TEST_DATA \
+			  text_column=$TEXT_COL \
+			  label_column=$LABEL_COL                                                                                          ```
+```
 
-Note that in both cases you should adapt the paths and column names to your dataset.
+Note that the `run.sh` script will be different based on the parameters given in the configuration file (e.g. if it is supposed to run locally or in hpc, the number of nodes, etc).
+
+It goes without saying that in both cases you should adapt the paths and column names to your dataset, this is just an example that uses the toy dataset provided in `/data`.
 
 
 ---

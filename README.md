@@ -67,15 +67,37 @@ As an example, the following command would download a [RoBERTa-large](https://hu
 
 6) Launch the script.
 
-If run locally
+To run locally, follow this example:
 ```console
-	train_files=<ADD_TRAIN_FILES_HERE>
-	dev_files=<ADD_DEV_FILES_HERE>
-	test_files=<ADD_TEST_FILES_HERE>
-	text_column=<ADD_TEXT_COLUMN_HERE>
-	label_column=<ADD_LABEL_COLUMN_HERE>
-	bash run.sh train_files=$train_files dev_files=$dev_files test_files=$test_files text_column=$text_column label_column=$label_column
+	TRAIN_DATA=../../data/toy_example/patstat_train/
+	DEV_DATA=../../data/toy_example/patstat_dev
+	TEST_DATA=../../data/toy_example/patstat_test/
+	TEXT_COL="text"
+	LABEL_COL="ipc0"
+
+	bash run.sh train_files=$TRAIN_DATA \
+				dev_files=$DEV_DATA \
+				test_files=$TEST_DATA \
+				text_column=$TEXT_COL \
+				label_column=$LABEL_COL
 ```
+
+To run on HPC, follow this example:
+```console
+	TRAIN_DATA=../../data/toy_example/patstat_train/
+ 	DEV_DATA=../../data/toy_example/patstat_dev
+	TEST_DATA=../../data/toy_example/patstat_test/
+	TEXT_COL="text"
+	LABEL_COL="ipc0"
+
+	sbatch run.sh train_files=$TRAIN_DATA \
+				  dev_files=$DEV_DATA \
+				  test_files=$TEST_DATA \
+				  text_column=$TEXT_COL \
+				  label_column=$LABEL_COL                                                                                          ```
+The `run.sh` script will be different based on the parameters given in the configuration file (e.g. if it is supposed to run locally or in hpc, the number of nodes, etc)
+
+Note that in both cases you should adapt the paths and column names to your dataset.
 
 
 ---

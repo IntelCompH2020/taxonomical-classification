@@ -86,7 +86,7 @@ TEST_DATA=../../data/toy_example/patstat_test/
 TEXT_COL="text"
 LABEL_COL="ipc0"
 
-sbatch run.sh train_files=$TRAIN_DATA dev_files=$DEV_DATA test_files=$TEST_DATA text_column=$TEXT_COL label_column=$LABEL_COL
+sbatch launcher.sh train_files=$TRAIN_DATA dev_files=$DEV_DATA test_files=$TEST_DATA text_column=$TEXT_COL label_column=$LABEL_COL
 ```
 
 Note that the `run.sh` script will be different based on the parameters given in the configuration file (e.g. if it is supposed to run locally or in hpc, the number of nodes, etc).

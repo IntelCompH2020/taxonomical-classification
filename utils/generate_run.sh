@@ -3,8 +3,8 @@
 . hyperparameters.config.sh
 
 # create run.sh
-printf "#!/bin/bash" > run.sh
-printf "#!/bin/bash" > launcher.sh
+echo "#!/bin/bash" > run.sh
+echo "#!/bin/bash" > launcher.sh
 
 # create header
 if [ $HPC = true ]

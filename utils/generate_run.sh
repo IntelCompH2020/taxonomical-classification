@@ -30,6 +30,8 @@ sed -n "/^$/,/^$/p" hyperparameters.config.sh >> run.sh
 if [ $HPC = true ]
 then
 	sed -n "/^# SLURM$/,/^$/p" hyperparameters.config.sh >> run.sh
+else
+	printf "NUM_NODES=1" >> run.sh
 fi
 
 

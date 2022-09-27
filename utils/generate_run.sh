@@ -3,8 +3,8 @@
 . hyperparameters.config.sh
 
 # create run.sh
-printf "#!/bin/bash" > run.sh
-printf "#!/bin/bash" > launcher.sh
+echo "#!/bin/bash" > run.sh
+echo "#!/bin/bash" > launcher.sh
 
 # create header
 if [ $HPC = true ]
@@ -46,9 +46,9 @@ then
 	cat ../../utils/template_multinode.sh >> run.sh
 	# Add srun
 	printf "srun run.sh train_files=\$train_files dev_files=\$dev_files test_files=\$test_files text_column=\$text_column label_column=\$label_column" >> launcher.sh
-	printf "python -m torch.distributed.launch \$DIST_ARGS finetune_classifier.py \$MODEL_ARGS \$OUTPUT_ARGS" >> run.sh
+	printf "python3 -m torch.distributed.launch \$DIST_ARGS finetune_classifier.py \$MODEL_ARGS \$OUTPUT_ARGS" >> run.sh
 else
 	# Add bash
 	printf "bash run.sh train_files=\$train_files dev_files=\$dev_files test_files=\$test_files text_column=\$text_column label_column=\$label_column" >> launcher.sh
-	printf "python finetune_classifier.py \$MODEL_ARGS \$OUTPUT_ARGS" >> run.sh
+	printf "python3 finetune_classifier.py \$MODEL_ARGS \$OUTPUT_ARGS" >> run.sh
 fi

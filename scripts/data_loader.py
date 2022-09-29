@@ -89,7 +89,10 @@ class TrainerHF(datasets.GeneratorBasedBuilder):
                 for id_, (text, labels) in df.iterrows():
                     features = {feature: False for feature in self.classes}
                     features["text"] = text
-                    for label in labels:
-                        features[label] = True
+                    if isinstance(labels, str):
+                        features[labels] = True
+                    else:
+                        for label in labels:
+                            features[label] = True
                     yield idx, features
                     idx += 1
